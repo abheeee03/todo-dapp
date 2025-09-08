@@ -7,6 +7,7 @@ import { ModeToggle } from './components/theme-toggle'
 import { Route, Routes } from 'react-router-dom'
 import ConnectWallet from './components/ConnectWallet'
 import Home from './components/Home'
+import { Toaster } from 'sonner';
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <ModeToggle/>
+            <Toaster position='top-center'/>
             <Routes>
               <Route path='/' element={<Home/>}/>
               <Route path='/connect' element={<ConnectWallet/>}/>

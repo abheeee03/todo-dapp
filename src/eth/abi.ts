@@ -1,4 +1,7 @@
-[
+export const wagmiConfig = {
+	address: "0x1EaE2f14c40753F89E2Cf8c8c13cBe0D20723D59",
+	abi: 
+	[
 	{
 		"inputs": [
 			{
@@ -160,4 +163,4 @@
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
+]}
