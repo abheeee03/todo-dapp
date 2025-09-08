@@ -59,7 +59,7 @@ async function poll(fn: () => boolean, interval = 2000, timeout = 30000) {
   }, [])
 
   const [todos, setTodos] = useState<any[]>([]);
-  const {data, isPending} = useReadContract({
+  const {data} = useReadContract({
     address: "0x1EaE2f14c40753F89E2Cf8c8c13cBe0D20723D59",
     abi: wagmiConfig.abi,
     functionName: "getMyTodos",

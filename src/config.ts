@@ -10,7 +10,7 @@ export const config = createConfig({
     safe(),
   ],
   transports: {
-    [sepolia.id]: http("https://eth-sepolia.g.alchemy.com/v2/69UbQTo575_N4KOcSWGpFKCbS1LB43kL"),
+    [sepolia.id]: http(import.meta.env.VITE_PUBLIC_RPC_URL),
     [mainnet.id]: http()
   },
 })
