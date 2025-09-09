@@ -10,8 +10,13 @@ import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { toast } from 'sonner'
 import { wagmiConfig} from './../eth/abi' 
+import TodoCard from './ui/TodoCard'
 
-
+type Todos = {
+  id: number,
+  isDone: boolean,
+  task: string
+}
 
 function TodoApp() {
   
@@ -19,7 +24,7 @@ function TodoApp() {
   const navigate = useNavigate()
   const [title, setTitle] = useState("")
   const [dilogOpen, setDilogOpen] = useState(false);
-
+  const [todos, setTodos] = useState<Todos[]>([])
    const { writeContract } = useWriteContract()
 
   const disonnectWallet = async () =>{
@@ -35,15 +40,15 @@ async function poll(fn: () => boolean, interval = 2000, timeout = 30000) {
     const check = async () => {
       try {
         if (fn()) {
-          return resolve(true); // ✅ Resolve when data is available
+          return resolve(true);
         }
         if (Date.now() < endTime) {
-          setTimeout(check, interval); // retry
+          setTimeout(check, interval); 
         } else {
           reject(new Error("Polling timed out"));
         }
       } catch (err) {
-        reject(err); // stop on error
+        reject(err); 
       }
     };
 
@@ -58,7 +63,6 @@ async function poll(fn: () => boolean, interval = 2000, timeout = 30000) {
     fetchTodos();
   }, [])
 
-  const [todos, setTodos] = useState<any[]>([]);
   const {data} = useReadContract({
     address: "0x1EaE2f14c40753F89E2Cf8c8c13cBe0D20723D59",
     abi: wagmiConfig.abi,
@@ -175,8 +179,19 @@ const addTodos = () =>{
         </DialogContent>
       </form>
     </Dialog>
-    <button onClick={getTodo}>get todo</button>
     </div>
+
+      <div className="flex flex-wrap gap-3 mt-4">
+        {
+          todos.map((todo, idx)=>{
+            return(
+              <>
+                <TodoCard key={idx} taskName={todo.task} isDone={todo.isDone}/>              
+              </>
+            )
+          })
+        }
+      </div>
 
    </div>
   )
